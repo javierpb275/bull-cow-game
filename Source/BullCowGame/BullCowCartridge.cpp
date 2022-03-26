@@ -13,4 +13,6 @@ void UBullCowCartridge::OnInput(const FString& Input) // When the player hits en
 {
     //Removes messages and clears the sign of the game
     ClearScreen();
+    FString HiddenWord = 'cake';
+    
 }
