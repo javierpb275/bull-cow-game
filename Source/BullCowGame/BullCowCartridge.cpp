@@ -8,14 +8,13 @@ void UBullCowCartridge::BeginPlay() // When the game starts
     PrintLine(TEXT("Welcome to Bull Cows!"));
     PrintLine(TEXT("Guess the 4 letter word!"));//Magic Number Remove
     PrintLine(TEXT("Press enter to continue..."));
+    HiddenWord = TEXT("cake");
 }
 
 void UBullCowCartridge::OnInput(const FString& Input) // When the player hits enter
 {
     //Removes messages and clears the sign of the game
     ClearScreen();
-    //TEXT() macro: so that unreal can encode it correctly
-    FString HiddenWord = TEXT("cake");//Move outside this function
 
     //check if it is the correct hidden word
     if (Input == HiddenWord) 
