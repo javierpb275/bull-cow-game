@@ -6,6 +6,7 @@ void UBullCowCartridge::BeginPlay() // When the game starts
     Super::BeginPlay();
     //Showing messages when start playing on the sign of the game
     PrintLine(TEXT("Welcome to Bull Cows!"));
+    PrintLine(TEXT("Guess the 4 letter word!"));//Magic Number Remove
     PrintLine(TEXT("Press enter to continue..."));
 }
 
@@ -14,7 +15,15 @@ void UBullCowCartridge::OnInput(const FString& Input) // When the player hits en
     //Removes messages and clears the sign of the game
     ClearScreen();
     //TEXT() macro: so that unreal can encode it correctly
-    FString HiddenWord = TEXT("cake");
-    PrintLine(Input);
-    
+    FString HiddenWord = TEXT("cake");//Move outside this function
+
+    //check if it is the correct hidden word
+    if (Input == HiddenWord) 
+    {
+        PrintLine(TEXT("You have won!"));
+    }
+    else 
+    {
+        PrintLine(TEXT("You have lost!"));
+    };
 }
