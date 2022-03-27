@@ -15,5 +15,6 @@ void UBullCowCartridge::OnInput(const FString& Input) // When the player hits en
     ClearScreen();
     //TEXT() macro: so that unreal can encode it correctly
     FString HiddenWord = TEXT("cake");
+    PrintLine(Input);
     
 }
