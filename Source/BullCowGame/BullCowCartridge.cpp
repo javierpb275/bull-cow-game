@@ -5,12 +5,18 @@ void UBullCowCartridge::BeginPlay() // When the game starts
 {
     Super::BeginPlay();
 
+    SetupGame();
+
+
+    //* : it is a pointer. a pointer is an address where that string is stored in memory and the is gonna return a pointer to an array of characters
+    //PrintF: it has no knowledge of defined types like FString. we need to use the *.
+    //PrintLine(FString::Printf(TEXT("The HiddenWord is: %s"), *HiddenWord));//Show string variable value in string
+    PrintLine(TEXT("The HiddenWord is: %s. It is %i characters Long"), *HiddenWord, HiddenWord.Len());//Show string variable value in string and length
+    
     // Showing messages when start playing on the sign of the game
     PrintLine(TEXT("Welcome to Bull Cows!"));
     PrintLine(TEXT("Guess the 4 letter word!")); // Magic Number Remove
     PrintLine(TEXT("Press enter to continue..."));
-
-    SetupGame();
 
     // Prompt player for guess
 }

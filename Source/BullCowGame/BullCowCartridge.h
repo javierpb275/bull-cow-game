@@ -18,6 +18,6 @@ public:
 
 	// Your declarations go below!
 private:
-	FString HiddenWord;
-	int32 Lives;
+	FString HiddenWord;//fstring is dynamic, it depends how many characters have regarding the space in memory.
+	int32 Lives;//it is a four byte space in memory.
 };

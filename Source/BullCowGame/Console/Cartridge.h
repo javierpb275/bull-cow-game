@@ -20,7 +20,7 @@ protected:
 	void PrintLine(const TCHAR* Line) const; // Avoid template for this case.
 	template<SIZE_T N, typename ...Types>
 	void PrintLine(const TCHAR (&Fmt)[N], Types... Args) const
-	{
+	{//we included the FString::Printf() to the PrintLine function so we don't have to use it.
 		PrintLine(FString::Printf(Fmt, Args...));
 	}
 	void ClearScreen() const;
