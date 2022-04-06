@@ -7,40 +7,41 @@ void UBullCowCartridge::BeginPlay() // When the game starts
 
     SetupGame();
 
-
     //* : it is a pointer. a pointer is an address where that string is stored in memory and the is gonna return a pointer to an array of characters
-    //PrintF: it has no knowledge of defined types like FString. we need to use the *.
-    //PrintLine(FString::Printf(TEXT("The HiddenWord is: %s"), *HiddenWord));//Show string variable value in string
-    PrintLine(TEXT("The HiddenWord is: %s.\nIt is %i characters Long"), *HiddenWord, HiddenWord.Len());//Show string variable value in string and length
-    
-    // Showing messages when start playing on the sign of the game
-    PrintLine(TEXT("Welcome to Bull Cows!"));
-    PrintLine(TEXT("Guess the %i letter word!"), HiddenWord.Len()); 
-    PrintLine(TEXT("Type in your guess and press enter to continue..."));
-
-    // Prompt player for guess
+    // PrintF: it has no knowledge of defined types like FString. we need to use the *.
+    // PrintLine(FString::Printf(TEXT("The HiddenWord is: %s"), *HiddenWord));//Show string variable value in string
+    PrintLine(TEXT("The HiddenWord is: %s.\nIt is %i characters Long"), *HiddenWord, HiddenWord.Len()); // Debug Line
 }
 
 void UBullCowCartridge::OnInput(const FString &Input) // When the player hits enter
 {
-    // Removes messages and clears the sign of the game
-    ClearScreen();
 
-    // checking player guess
-
-    // check if it is the correct hidden word
-    if (Input == HiddenWord)
+    if (bGameOver)
     {
-        PrintLine(TEXT("You have won!"));
+        ClearScreen();
+        SetupGame();
     }
-    else
+    else // Checking PlayerGuess
     {
-        if (Input.Len() != HiddenWord.Len())
+        if (Input == HiddenWord)
         {
-            PrintLine(TEXT("The HiddenWord is %i characters long, try again!"), HiddenWord.Len());
+            PrintLine(TEXT("You have won!"));
+            EndGame();
         }
-        PrintLine(TEXT("You have lost!"));
-    };
+        else
+        {
+            if (Input.Len() != HiddenWord.Len())
+            {
+                PrintLine(TEXT("The HiddenWord is %i characters long. \nYou have lost!"), HiddenWord.Len());
+                EndGame();
+            }
+        };
+    }
+
+    // if game is over ClearScreen() and SetupGame()
+
+    // else checking player guess
+
     // Check if Isogram
     // prompt to guess again
     // Check right number of characters
@@ -59,6 +60,19 @@ void UBullCowCartridge::OnInput(const FString &Input) // When the player hits en
 
 void UBullCowCartridge::SetupGame()
 {
+    // welcoming player
+    PrintLine(TEXT("Welcome to Bull Cows!"));
+
     HiddenWord = TEXT("cakes");
     Lives = 4;
+    bGameOver = false;
+
+    PrintLine(TEXT("Guess the %i letter word!"), HiddenWord.Len());
+    PrintLine(TEXT("Type in your guess. \nPress enter to continue...")); // Prompt player for guess
+}
+
+void UBullCowCartridge::EndGame()
+{
+    bGameOver = true;
+    PrintLine(TEXT("Press enter to play again."));
 }
